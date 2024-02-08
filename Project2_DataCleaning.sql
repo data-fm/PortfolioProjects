@@ -83,16 +83,17 @@ WITH RowNumCTE AS(
 SELECT *,
 	ROW_NUMBER() OVER(
 	PARTITION BY ParcelID, 
-				 PropertyAddress,
-				 SalePrice,
-				 SaleDate,
-				 LegalReference
-				 ORDER BY
-					UniqueID
-					) as row_num
+		PropertyAddress,
+		SalePrice,
+		SaleDate,
+		LegalReference
+		ORDER BY
+			UniqueID
+			) as row_num
 
 FROM NashvilleHousing
 )
+	
 DELETE
 FROM RowNumCTE
 WHERE row_num > 1
